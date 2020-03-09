@@ -40,7 +40,7 @@ function createWindow() {
     win.loadURL('app://./index.html')
     // autoUpdater.checkForUpdatesAndNotify()
   }
-
+  win.maximize()
   win.on('closed', () => {
     win = null
   })
