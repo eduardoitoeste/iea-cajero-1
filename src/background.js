@@ -116,13 +116,13 @@ ipcMain.on('restart_app', () => {
 });
 
 autoUpdater.on('update-available', () => {
-  dialog.showErrorBox('actualizacion', 'pendiente') 
+  // dialog.showErrorBox('actualizacion', 'pendiente') 
   temp.send('update_available',{text:'Hay una nueva actualizacion disponible!',view:true,type:'warning',viewButtonReinicio:false});
 });
 
 autoUpdater.on('update-downloaded', function (info) {
-  dialog.showErrorBox('actualizacion', 'hecha')
+  // dialog.showErrorBox('actualizacion', 'hecha')
   
-  temp.send('update_downloaded',{text:'La actualizacion ha terminado de descargar',view:true,type:'success',viewButtonReinicio:true});
+  temp.send('update-downloaded',{text:'La actualizacion ha terminado de descargar',view:true,type:'success',viewButtonReinicio:true});
   // autoUpdater.quitAndInstall();
 });
