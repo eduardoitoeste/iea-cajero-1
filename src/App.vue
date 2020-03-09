@@ -17,12 +17,12 @@
     </v-app-bar> -->
 
     <v-content class="primary"  >
-      <!-- <Header/> -->
-      <!-- <AlertSys/> -->
+      <Header/>
+      <AlertSys/>
       <!-- <ButtonFloat/> -->
       <!-- <InfoUser/> -->
-      <!-- <LoaderModal/> -->
-      <!-- <DialogConfirm/> -->
+      <LoaderModal/>
+      <DialogConfirm/>
       <v-container fluid>
         <v-alert
             :value="alertUpdate.view"
@@ -48,7 +48,7 @@
         <v-col cols="12" sm="12" md="12" class="text-center mb-n5 title" v-if="this.$store.getters.credentials.auth">
                 <h1 class="secondary--text">Bienvenido {{this.$store.getters.credentials.user.Apellidos}} {{this.$store.getters.credentials.user.Nombres}}.</h1>
         </v-col>
-        <v-btn @click="testExample(1)">excvample 4444444444444</v-btn>
+        <v-btn @click="testExample(1)">excvample</v-btn>
         <transition name="fade">
          <router-view/>
         </transition>
@@ -59,12 +59,12 @@
 
 <script>
 
-// import Header from './components/Header'
-// import AlertSys from './components/AlertSys'
-// import LoaderModal from './components/LoaderModal'
-// import InfoUser from './components/InfoUser'
-// import DialogConfirm from './components/DialogConfirm'
-// import ButtonFloat from './components/ButtonFloat'
+import Header from './components/Header'
+import AlertSys from './components/AlertSys'
+import LoaderModal from './components/LoaderModal'
+import InfoUser from './components/InfoUser'
+import DialogConfirm from './components/DialogConfirm'
+import ButtonFloat from './components/ButtonFloat'
 import { ipcRenderer } from 'electron'
 let routes = [
   'InsertPayment',
@@ -76,12 +76,12 @@ let limit = 30
 export default {
   name: 'App',
   components: {
-    // Header,
-    // AlertSys,
-    // LoaderModal,
-    // InfoUser,
-    // DialogConfirm,
-    // ButtonFloat
+    Header,
+    AlertSys,
+    LoaderModal,
+    InfoUser,
+    DialogConfirm,
+    ButtonFloat
   },
   mounted(){
       
