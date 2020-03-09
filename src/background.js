@@ -96,7 +96,9 @@ if (isDevelopment) {
 }
 
 
-
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
 
 ipcMain.on('restart_app', () => {
   // console.log('restart')
