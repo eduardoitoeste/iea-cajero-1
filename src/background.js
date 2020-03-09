@@ -107,10 +107,11 @@ ipcMain.on('restart_app', () => {
 
 autoUpdater.on('update-available', () => {
   dialog.showErrorBox('actualizacion', 'pendiente') 
-  event.sender.send('update_available',{text:'Hay una nueva actualizacion disponible!',view:true,type:'warning',viewButtonReinicio:false});
+  // event.sender.send('update_available',{text:'Hay una nueva actualizacion disponible!',view:true,type:'warning',viewButtonReinicio:false});
 });
 
 autoUpdater.on('update-downloaded', function (info) {
   dialog.showErrorBox('actualizacion', 'hecha')
-  event.sender.send('update_downloaded',{text:'La actualizacion ha terminado de descargar',view:true,type:'success',viewButtonReinicio:true});
+  autoUpdater.quitAndInstall();
+  // event.sender.send('update_downloaded',{text:'La actualizacion ha terminado de descargar',view:true,type:'success',viewButtonReinicio:true});
 });
