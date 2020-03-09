@@ -22,121 +22,121 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      // component: Home
+      component: Home
     },
-    // {
-    //   path: '/ingresar',
-    //   name: 'InitSession',
-    //   component: InitSession
-    // },
-    // {
-    //   path: '/inicar-pago',
-    //   name: 'StartPayment',
-    //   component: StartPayment,
-    //   beforeEnter: (to,from, next)=>{
-    //     // console.log('middleware',store.getters.credentials.auth)
-    //     // console.log('middleware',store.getters.credentials)
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+    {
+      path: '/ingresar',
+      name: 'InitSession',
+      component: InitSession
+    },
+    {
+      path: '/inicar-pago',
+      name: 'StartPayment',
+      component: StartPayment,
+      beforeEnter: (to,from, next)=>{
+        // console.log('middleware',store.getters.credentials.auth)
+        // console.log('middleware',store.getters.credentials)
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/seleccionar-pago',
-    //   name: 'SelectPayments',
-    //   component: SelectPayments,
-    //   beforeEnter: (to,from, next)=>{
-    //     // console.log('middleware',store.getters.credentials.auth)
-    //     // console.log('middleware',to)
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/seleccionar-pago',
+      name: 'SelectPayments',
+      component: SelectPayments,
+      beforeEnter: (to,from, next)=>{
+        // console.log('middleware',store.getters.credentials.auth)
+        // console.log('middleware',to)
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/insertar-pago',
-    //   name: 'InsertPayment',
-    //   component: InsertPayment,
-    //   beforeEnter: (to,from, next)=>{
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/insertar-pago',
+      name: 'InsertPayment',
+      component: InsertPayment,
+      beforeEnter: (to,from, next)=>{
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/finalizado-pago',
-    //   name: 'FinishPayment',
-    //   component: FinishPayment,
-    //   beforeEnter: (to,from, next)=>{
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/finalizado-pago',
+      name: 'FinishPayment',
+      component: FinishPayment,
+      beforeEnter: (to,from, next)=>{
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/seleccionar-tipo-pago',
-    //   name: 'SelectTypePayment',
-    //   component: SelectTypePayment,
-    //   beforeEnter: (to,from, next)=>{
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/seleccionar-tipo-pago',
+      name: 'SelectTypePayment',
+      component: SelectTypePayment,
+      beforeEnter: (to,from, next)=>{
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/seleccionar-pago-regular',
-    //   name: 'SelectPaymentPagoRegular',
-    //   component: SelectPaymentPagoRegular,
-    //   beforeEnter: (to,from, next)=>{
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/seleccionar-pago-regular',
+      name: 'SelectPaymentPagoRegular',
+      component: SelectPaymentPagoRegular,
+      beforeEnter: (to,from, next)=>{
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/insertar-pago-concepto-regular',
-    //   name: 'InsertPaymentConceptoRegular',
-    //   component: InsertPaymentConceptoRegular,
-    //   beforeEnter: (to,from, next)=>{
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/insertar-pago-concepto-regular',
+      name: 'InsertPaymentConceptoRegular',
+      component: InsertPaymentConceptoRegular,
+      beforeEnter: (to,from, next)=>{
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
-    // {
-    //   path: '/finalizado-pago-concepto-regular',
-    //   name: 'FinishPaymentCR',
-    //   component: FinishPaymentTest,
-    //   beforeEnter: (to,from, next)=>{
-    //     if(store.getters.credentials.auth){
-    //       next();
-    //     }else{
-    //       next({ name: 'home' })
-    //     }
+      }
+    },
+    {
+      path: '/finalizado-pago-concepto-regular',
+      name: 'FinishPaymentCR',
+      component: FinishPaymentTest,
+      beforeEnter: (to,from, next)=>{
+        if(store.getters.credentials.auth){
+          next();
+        }else{
+          next({ name: 'home' })
+        }
         
-    //   }
-    // },
+      }
+    },
 
     
   ]
