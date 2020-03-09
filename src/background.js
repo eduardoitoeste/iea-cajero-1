@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow , ipcMain , dialog  } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -94,3 +94,23 @@ if (isDevelopment) {
     })
   }
 }
+
+
+
+
+ipcMain.on('restart_app', () => {
+  // console.log('restart')
+  // app.relaunch()
+  // app.exit()
+  autoUpdater.quitAndInstall();
+});
+
+autoUpdater.on('update-available', () => {
+  dialog.showErrorBox('actualizacion', 'pendiente') 
+  event.sender.send('update_available',{text:'Hay una nueva actualizacion disponible!',view:true,type:'warning',viewButtonReinicio:false});
+});
+
+autoUpdater.on('update-downloaded', function (info) {
+  dialog.showErrorBox('actualizacion', 'hecha')
+  event.sender.send('update_downloaded',{text:'La actualizacion ha terminado de descargar',view:true,type:'success',viewButtonReinicio:true});
+});
