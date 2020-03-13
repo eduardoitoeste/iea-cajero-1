@@ -48,7 +48,7 @@
         <v-col cols="12" sm="12" md="12" class="text-center mb-n5 title" v-if="this.$store.getters.credentials.auth">
                 <h1 class="secondary--text">Bienvenido {{this.$store.getters.credentials.user.Apellidos}} {{this.$store.getters.credentials.user.Nombres}}.</h1>
         </v-col>
-        
+
         <transition name="fade">
          <router-view/>
         </transition>
@@ -122,49 +122,49 @@ export default {
 
       let x = 0
       let that = this
-      this.intervalVar = setInterval(() => {
-        // console.log('dawdawdaw',x)
-        // this.$socket.emit('test', x);
-        for(let index in routes){
-          if(routes[index] == this.$route.name){
-            return
-          }
+      // this.intervalVar = setInterval(() => {
+      //   // console.log('dawdawdaw',x)
+      //   // this.$socket.emit('test', x);
+      //   for(let index in routes){
+      //     if(routes[index] == this.$route.name){
+      //       return
+      //     }
           
-        }
-          // console.log('verificando estado',x)
-          document.onmousemove = function(){
-            // console.log('cambio del mouse')
-            x=0
+      //   }
+      //     // console.log('verificando estado',x)
+      //     document.onmousemove = function(){
+      //       // console.log('cambio del mouse')
+      //       x=0
 
-            that.$socket.emit('using-machine');
-            // return
-          };
-          document.onkeypress = function(){
-            // console.log('cambio del press')
-            that.$socket.emit('using-machine');
-            x=0
-            // return
-          };
-          // console.log(this.$route.name)
-          if(this.$route.name == 'FinishPayment' || this.$route.name == 'FinishPaymentTest'){
-            if(x == 60){
-              this.$store.dispatch('logout',true)
-              x = 0
-              return
-            }
+      //       // that.$socket.emit('using-machine');
+      //       // return
+      //     };
+      //     document.onkeypress = function(){
+      //       // console.log('cambio del press')
+      //       // that.$socket.emit('using-machine');
+      //       x=0
+      //       // return
+      //     };
+      //     // console.log(this.$route.name)
+      //     if(this.$route.name == 'FinishPayment' || this.$route.name == 'FinishPaymentTest'){
+      //       if(x == 60){
+      //         this.$store.dispatch('logout',true)
+      //         x = 0
+      //         return
+      //       }
             
-          }else{
-            if(x == 30){
-              this.$store.dispatch('logout',true)
-              x = 0
-              return
-            }
+      //     }else{
+      //       if(x == 30){
+      //         this.$store.dispatch('logout',true)
+      //         x = 0
+      //         return
+      //       }
             
-          }
+      //     }
           
           
-          x++
-        }, 1000);
+      //     x++
+      //   }, 1000);
   },
   data: () => ({
     intervalVar:null,

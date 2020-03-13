@@ -113,6 +113,9 @@ export default {
             let data = this.$store.getters.paymentPlans.items
             let selected = false;
             for(let index in data){
+                if(!data[index].block){
+
+                
                 this.items.push({
                     IDStB:data[index].IDStB,
                     Curso:data[index].Curso,
@@ -120,12 +123,14 @@ export default {
                     descuento:data[index].descuento,
                     precioAPagar:data[index].precioAPagar,
                     selected:false,
-                    status:data[index].status
+                    status:data[index].estado
                 })
-                if(!selected && data[index].status != 2){
-                    this.items[index].selected = true
-                    this.total = this.items[index].precioAPagar
-                    selected = true
+                // if(!selected && data[index].estado != 2){
+                //     this.items[index].selected = true
+                //     this.total = this.items[index].precioAPagar
+                //     selected = true
+                // }
+
                 }
                 
             }
