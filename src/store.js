@@ -22,7 +22,9 @@ export default new Vuex.Store({
     finalPayment:'',
 
     dataSendApiConceptoRegular:'',
-    finalPaymentMachine:''
+    finalPaymentMachine:'',
+
+    errorPanel:''
 
   },
   getters:{
@@ -64,6 +66,10 @@ export default new Vuex.Store({
     },
     verifySys (state){
     	return state.verifySys
+    },
+
+    errorPanel (state){
+    	return state.errorPanel
     },
     
     
@@ -107,6 +113,10 @@ export default new Vuex.Store({
     },
     verifySys (state,step){
     	return state.verifySys = step
+    },
+
+    verifySys (state,step){
+    	return state.errorPanel = step
     },
 
     
@@ -312,6 +322,10 @@ export default new Vuex.Store({
         context.commit('verifySys',false)
         context.commit('alertSys',{snackbar:true,text:'ERROR!!!, No se puede establecer conexion con el servidor...',color:'danger'})
       })
+    },
+
+    errorPanel(context,data){
+      context.commit('errorPanel',true)
     }
 
 

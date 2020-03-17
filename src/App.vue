@@ -43,6 +43,9 @@
               </v-col>
             </v-row>
           </v-alert>
+          
+
+          
         
 
         <v-col cols="12" sm="12" md="12" class="text-center mb-n5 title" v-if="this.$store.getters.credentials.auth">
@@ -66,6 +69,9 @@ import InfoUser from './components/InfoUser'
 import DialogConfirm from './components/DialogConfirm'
 import ButtonFloat from './components/ButtonFloat'
 import { ipcRenderer } from 'electron'
+import ApiRest from './js/Api'
+let Api = new ApiRest()
+
 let routes = [
   'InsertPayment',
   'home',
@@ -122,49 +128,58 @@ export default {
 
       let x = 0
       let that = this
-      // this.intervalVar = setInterval(() => {
-      //   // console.log('dawdawdaw',x)
-      //   // this.$socket.emit('test', x);
-      //   for(let index in routes){
-      //     if(routes[index] == this.$route.name){
-      //       return
-      //     }
-          
-      //   }
-      //     // console.log('verificando estado',x)
-      //     document.onmousemove = function(){
-      //       // console.log('cambio del mouse')
-      //       x=0
+      this.intervalVar = setInterval(() => {
+        // console.log('dawdawdaw',x)
+        // this.$socket.emit('test', x);
+        document.onmousemove = function(){
+            console.log('cambio del mouse')
+            that.$socket.emit('using-machine');
+        };
+        document.onkeypress = function(){
+            console.log('cambio del press')
+            that.$socket.emit('using-machine');
+        };
 
-      //       // that.$socket.emit('using-machine');
-      //       // return
-      //     };
-      //     document.onkeypress = function(){
-      //       // console.log('cambio del press')
-      //       // that.$socket.emit('using-machine');
-      //       x=0
-      //       // return
-      //     };
-      //     // console.log(this.$route.name)
-      //     if(this.$route.name == 'FinishPayment' || this.$route.name == 'FinishPaymentTest'){
-      //       if(x == 60){
-      //         this.$store.dispatch('logout',true)
-      //         x = 0
-      //         return
-      //       }
+        for(let index in routes){
+          if(routes[index] == this.$route.name){
+            return
+          }
+          
+        }
+          // console.log('verificando estado',x)
+          document.onmousemove = function(){
+            console.log('cambio del mouse 2')
+            x=0
+
+            that.$socket.emit('using-machine');
+            return
+          };
+          document.onkeypress = function(){
+            console.log('cambio del press 2')
+            that.$socket.emit('using-machine');
+            x=0
+            return
+          };
+          // console.log(this.$route.name)
+          if(this.$route.name == 'FinishPayment' || this.$route.name == 'FinishPaymentTest'){
+            if(x == 60){
+              this.$store.dispatch('logout',true)
+              x = 0
+              return
+            }
             
-      //     }else{
-      //       if(x == 30){
-      //         this.$store.dispatch('logout',true)
-      //         x = 0
-      //         return
-      //       }
+          }else{
+            if(x == 30){
+              this.$store.dispatch('logout',true)
+              x = 0
+              return
+            }
             
-      //     }
+          }
           
           
-      //     x++
-      //   }, 1000);
+          x++
+        }, 1000);
   },
   data: () => ({
     intervalVar:null,
@@ -194,6 +209,22 @@ export default {
     },
     testExample(id){
         ipcRenderer.send('update-available-test',id);
+    },
+    testHttp(){
+      let data = {
+        url:'test',
+        data:{id:'daw'},
+        status:500,
+        message:'dawdawdawdawdawdawd',
+        mode:'lo que sea'
+      }
+      // this.$socket.emit('error-machine',data);
+      // return
+      Api.post({url:'/testhttp'}).then(res=>{
+        // console.log('success')
+      }).catch(err=>{
+        // console.error('danger')
+      })
     }
   }
 };

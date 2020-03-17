@@ -2,11 +2,12 @@ import Route from './RouteApi'
 import axios from 'axios'
 let host = 'http://localhost:5000/bill';
 const messageErrorMaquina = 'Sin conexion con la maquina lectora'
+// import SocketVar from 'vue-socket.io'
 // axios.defaults.headers.common['Authorization'] = 'Bearer bbbbb'
 
 // axios.defaults.headers.common['Content-Type'] ='application/json';
 
-
+import bus from '../bus'
 export default class Api {
     
     post(data){
@@ -25,8 +26,8 @@ export default class Api {
                 return
              }).catch(err=>{
                 // console.error('ERROR POST ERROR >>>>',err)
-                console.error('ERROR POST Mensaje >>>>',err.response.data)
-                console.error('ERROR POST status >>>>',err.response.status)
+                // console.error('ERROR POST Mensaje >>>>',err.response.data)
+                // console.error('ERROR POST status >>>>',err.response.status)
                 that.responseStatus(err,url,'peticion')
                 reject(err)
                 return
@@ -278,6 +279,7 @@ export default class Api {
                 return response.json();
             })
             .then(function(resp) {
+                
                 that.responseStatus(resp,url,'maquina')
                 if(resp.data[0].code === 200){
                     resolve(resp)
@@ -355,27 +357,70 @@ export default class Api {
     // regulador de respuestas
 
     responseStatus(data,url,mode){
-        // console.log('statuuuuuuuuuuuuuuus')
-        // console.log(data)
-        // console.log(this.$socket)
-        // if(mode == 'maquina'){
+        
+        
+        // console.log('aaaa')
+        
+        // return
+        // return
+        // console.warn(data,url,mode)
+        if(mode == 'maquina'){
+            console.warn(data)
+            let responseSend = {}
+            if(data == messageErrorMaquina){
+                responseSend = {
+                    url:url,
+                    data:data,
+                    status:0,
+                    message:data,
+                    mode:mode
+                }
+                bus.$emit('error-machine',responseSend)
+                return
+            }else{
+                if(data.data[0].code != 200){
+                    responseSend = {
+                        url:url,
+                        data:data,
+                        status:data.data[0].code,
+                        message:data,
+                        mode:mode
+                    }
+                    bus.$emit('error-machine',responseSend)
+                    return
+                }
+            }
+            
+            return 
+            console.error('maquina',responseSend)
 
-        //     if(data.data[0].code){
-        //         if(data.data[0].code != 200){
-
-        //         }
-        //     }else{
-
-        //     }
-
-        // }else{
-        //     if(data.status == 200){
-        //         // console.log(200)
-                
-        //     }else{
-        //         console.error(500)
-        //     }
-        // }
+        }else{
+            let responseSend = {}
+            // console.warn(data.message)
+            if(data.response == undefined){
+                 
+                responseSend = {
+                    url:url,
+                    data:data,
+                    status:0,
+                    message:data.message,
+                    mode:mode
+                }
+            }else{
+                responseSend = {
+                    url:url,
+                    data:data.response.data,
+                    status:data.response.status,
+                    message:data.message,
+                    mode:mode
+                }
+                // bus.$emit('error-machine',responseSend)
+                // return
+            }
+            bus.$emit('error-machine',responseSend)
+            return
+            console.error('peticion',responseSend)
+        }
         
         
     }
